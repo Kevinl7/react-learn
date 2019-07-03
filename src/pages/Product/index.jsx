@@ -1,18 +1,34 @@
 import React from 'react'
 // import { Redirect, Link } from 'react-router-dom'
-import { Card, Table, Button, Icon  } from 'antd'
+import { Card, Table, Button, Icon, Modal  } from 'antd'
+import FormAdd from './form-add'
 import './index.less'
 
 export default class Product extends React.Component {
   state = {
     data: [],
-    parentId: 0
+    parentId: 0,
+    visible: false,
+    loading: false
+  }
+  // 新增
+  handleAdd = () => {
+    this.setState({
+      visible: true
+    })
+  }
+  // 弹出框 提交
+  handleOk = () => {
+
+  }
+  // 弹出框关闭
+  handleCancel = () => {
+    this.setState({
+      visible: false
+    })
   }
 
-  handleAdd = () => {
-    
-    
-  }
+
   handleClick = (record) => {
     this.setState({
       parentId: record.id
@@ -49,6 +65,7 @@ export default class Product extends React.Component {
   }
 
   render() {
+    
     let title = this.state.parentId === 0 ? '商品分类'
       : (
         <div>
@@ -85,6 +102,23 @@ export default class Product extends React.Component {
             rowKey='money'
           />
         </Card>
+        {/* 新增 */}
+        <Modal
+          title="新增"
+          visible={this.state.visible}
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}
+          footer={[
+            <Button key="back" onClick={this.handleCancel}>
+              取消
+            </Button>,
+            <Button key="submit" type="primary" loading={this.state.loading} onClick={this.handleOk}>
+              提交
+            </Button>,
+          ]}
+        >
+          <FormAdd></FormAdd>
+        </Modal>
       </div>
     )
   }
