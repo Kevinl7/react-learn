@@ -15,7 +15,12 @@ const menuList =  [
         icon: 'user'
       }
     ]
-  }
+  },
+  {
+    title: '设置',
+    path: '/sys',
+    icon: 'user'
+  },
 ]
 
 export default menuList

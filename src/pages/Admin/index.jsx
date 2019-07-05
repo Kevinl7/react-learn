@@ -5,6 +5,7 @@ import './index.less'
 
 import Home from '../Home'
 import Product from '../Product'
+import Sys from '../Sys'
 import Header from '../../components/header'
 import menuList from '../../config/menu'
 
@@ -132,6 +133,7 @@ export default class Admin extends React.Component {
               <Switch>
                 <Route path='/home' component={ Home } />
                 <Route path='/product' component={ Product } />
+                <Route path='/sys' component={ Sys } ></Route>
                 <Redirect to='/home' />
               </Switch>
           </Content>
