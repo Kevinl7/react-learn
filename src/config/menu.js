@@ -13,6 +13,11 @@ const menuList =  [
         title: '商品分类',
         path: '/product',
         icon: 'user'
+      },
+      {
+        title: '样本分类',
+        path: '/sample',
+        icon: 'user'
       }
     ]
   },

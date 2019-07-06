@@ -30,7 +30,7 @@ class Sys extends React.Component {
         onSubmit={values=>this.handleClick(values)}
         effects={($) => {
           $('onFieldChange', 'aa').subscribe(fieldState => {
-            this.setState({ aa: fieldState.value})
+            this.setState({ aa: fieldState.value || ''})
           })
         }}>
         <FormItemGrid title="字段4" gutter={10} cols={[{xs:24, sm: 12 }, {xs:24, sm: 12 }]}>
