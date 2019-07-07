@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route, Redirect } from 'react-router-dom'
+import { Switch, Route, } from 'react-router-dom'
 import { Button } from 'antd'
 
 import Detail from './detail'
@@ -12,9 +12,8 @@ class Sample extends React.Component {
       <Switch>
         {/* exact 路径完全匹配 */}
         <Route path="/sample" exact component={Home}></Route>
-        <Route path="/sample/detail"  exact component={Detail}></Route>
-        <Route path="/sample/add"  exact component={AddUpdate}></Route>
-        <Redirect to='/sample' />
+        <Route path="/sample/detail"   component={Detail}></Route>
+        <Route path="/sample/add"   component={AddUpdate}></Route>
       </Switch>
     )
   }
