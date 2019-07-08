@@ -17,7 +17,11 @@ class Home extends React.Component {
 
   state = {
     smapleData: [],
-    total: null
+    total: null,
+    queryData: {
+      type: '2',
+      name: ''
+    }
   }
   initColumns = () => {
     this.columns = [
@@ -37,12 +41,11 @@ class Home extends React.Component {
       {
         title: '状态',
         width: 100,
-        dataIndex: 'status',
-        render: (status) => {
+        render: (record) => {
           return (
             <span>
-              <Button>商家</Button>
-              <span>下架</span>
+              <Button onClick={() => this.handleType(record)}>{record.status !== 0 ? '上架' : '下架'}</Button>
+              <span>{record.status === 0 ? '上架' : '下架'}</span>
             </span>
             
           )
@@ -53,12 +56,28 @@ class Home extends React.Component {
         width: 100,
         render: (row) => {
           return (
-            <LinkBtton>详情</LinkBtton>
+            <LinkBtton onClick={() => this.props.history.push(`/sample/detail/${row.id }`)}>详情</LinkBtton>
           )
         }
       }
     ]
   }
+
+
+  handleType = (row) => {
+    let data = this.state.smapleData.map(item => {
+      if (item.id === row.id) {
+        item.status = 1
+      }
+      return item
+    })
+    this.setState({
+      smapleData: data
+    })
+    
+    
+  }
+
   getData = async (pageNum) => {
     let smapleData = await getProduct({ pageNum })
     this.setState({
@@ -77,15 +96,29 @@ class Home extends React.Component {
     this.getData()
   }
 
+  searchQuery = (value) => {
+    this.setState({
+      queryData: {
+        ...this.state.queryData,
+        name: value
+      }
+    })
+  }
+
   render () {
-    
+
     const title = (
       <div>
-        <Select value='1'>
+        {
+          /* 展开修饰符 处理给深度对象摸个属性赋值
+          this.setState({ queryData: {...this.state.queryData, type: value}}) 
+          */
+       }
+        <Select value={this.state.queryData.type} onChange={value => this.setState({ queryData: {...this.state.queryData, type: value}})}>
           <Option value='1'>按名称</Option>
           <Option value='2'>按分类</Option>
         </Select>
-        <Search style={{ width: '300px'}} placeholder="input search text" onSearch={value => console.log(value)} enterButton />
+        <Search style={{ width: '300px' }} placeholder="input search text" onSearch={value => this.searchQuery(value)} enterButton />
       </div>
     )
     const extra = (

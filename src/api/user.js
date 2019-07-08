@@ -8,3 +8,7 @@ export function login(data) {
 export function getProduct(data) {
   return service(BASE + '/product', data)
 }
+
+export function getDetail(data) {
+  return service(BASE + '/getDetail', data)
+}
