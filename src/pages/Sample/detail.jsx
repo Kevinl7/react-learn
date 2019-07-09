@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Card, Button, Icon, List } from 'antd'
 
-import {	getDetail } from '../../api/user'
+import { getDetail, getOne, getTwo } from '../../api/user'
 
 const { Item } = List
 
@@ -22,6 +22,9 @@ export default class Detail extends React.Component {
       data: data
     })
   }
+  goBack = () => {
+    this.props.history.push('/sample')
+  }
 
   componentDidMount() {
     this.initData(this.props.match.params.id)
@@ -30,7 +33,7 @@ export default class Detail extends React.Component {
   render() {
     const title = (
       <span>
-        <Icon type='arrow-left'></Icon>
+        <Icon type='arrow-left' onClick={this.goBack}></Icon>
         <span>商品详情</span>
       </span>
     )

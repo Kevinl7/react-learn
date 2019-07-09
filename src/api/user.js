@@ -12,3 +12,11 @@ export function getProduct(data) {
 export function getDetail(data) {
   return service(BASE + '/getDetail', data)
 }
+
+export function getOne(data) {
+  return service(BASE + '/getDetail', data)
+}
+
+export function getTwo(data) {
+  return service(BASE + '/getDetail', data)
+}

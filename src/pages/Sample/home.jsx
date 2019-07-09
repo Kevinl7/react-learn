@@ -44,7 +44,7 @@ class Home extends React.Component {
         render: (record) => {
           return (
             <span>
-              <Button onClick={() => this.handleType(record)}>{record.status !== 0 ? '上架' : '下架'}</Button>
+              <Button onClick={() => this.handleType(record, record.status===1 ? 0 : 1)}>{record.status !== 0 ? '上架' : '下架'}</Button>
               <span>{record.status === 0 ? '上架' : '下架'}</span>
             </span>
             
@@ -67,7 +67,7 @@ class Home extends React.Component {
   handleType = (row) => {
     let data = this.state.smapleData.map(item => {
       if (item.id === row.id) {
-        item.status = 1
+        item.status = item.status === 1 ? 0 :1
       }
       return item
     })
