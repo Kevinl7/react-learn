@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { Card, Button, Icon, List } from 'antd'
+import { Card, Icon, List } from 'antd'
 
-import { getDetail, getOne, getTwo } from '../../api/user'
+import { getDetail } from '../../api/user'
 
 const { Item } = List
 

@@ -7,14 +7,18 @@ import SchemaForm, {
   FormCard,
   createFormActions
 } from '@uform/antd'
+import 'antd/dist/antd.css'
+import './index.less'
 
 const actions = createFormActions()
 
 class Sys extends React.Component {
   
   state = {
-    aa: '',
-    bb: ''
+    name: '',
+    age: '',
+    sex: null,
+    date: ''
   }
 
 
@@ -27,15 +31,45 @@ class Sys extends React.Component {
   render () {
     return (
       <SchemaForm
+        className='schem'
         onSubmit={values=>this.handleClick(values)}
         effects={($) => {
-          $('onFieldChange', 'aa').subscribe(fieldState => {
-            this.setState({ aa: fieldState.value || ''})
+          $('onFieldChange', 'name').subscribe(fieldState => {
+            this.setState({ name: fieldState.value || ''})
+          })
+          $('onFieldChange', 'age').subscribe(fieldState => {
+            this.setState({ age: fieldState.value || '' })
+          })
+          $('onFieldChange', 'sex').subscribe(fieldState => {
+            this.setState({ sex: fieldState.value || '' })
+          })
+          $('onFieldChange', 'date').subscribe(fieldState => {
+            this.setState({ date: fieldState.value || '' })
           })
         }}>
-        <FormItemGrid title="字段4" gutter={10} cols={[{xs:24, sm: 12 }, {xs:24, sm: 12 }]}>
-        <Field name="aa" type="string" title="AA"/>
-        <Field name="bb" type="string" title="f"/>
+        <FormItemGrid gutter={20} cols={[{ xs: 24, sm: 12, md: 8 }, { xs: 24, sm: 12, md: 8 }, { xs: 24, sm: 12, md: 8 }, { xs: 24, sm: 12, md: 8 }]}>
+        <Field 
+          name="name" 
+          type="string" 
+          title="名称"
+          x-rules={{ required: true, message: "该字段必填" }}/>
+        <Field 
+          type="number" 
+          title="年龄" 
+          name="age"
+          x-props={{ style: { width: '100%' } }}/>
+        <Field
+          type="string"
+            enum={[{ label: '男', value: 'man'},{label: '女', value: 'women' }]}
+          required
+          title="性别"
+          name="sex"
+        />
+        <Field 
+          type="date" 
+          title="日期选择" 
+          name="date"
+          x-props={{style: {width: '100%'}}} />
       </FormItemGrid>
         
         <FormButtonGroup>

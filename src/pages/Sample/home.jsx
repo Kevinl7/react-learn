@@ -122,7 +122,7 @@ class Home extends React.Component {
       </div>
     )
     const extra = (
-      <Button type='primary'>
+      <Button type='primary' onClick={() => this.props.history.push(`/sample/add/`)}>
         <Icon type='plus'></Icon>  
         新增
       </Button>
