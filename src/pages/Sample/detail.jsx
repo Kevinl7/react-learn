@@ -27,7 +27,7 @@ export default class Detail extends React.Component {
   }
 
   componentDidMount() {
-    this.initData(this.props.match.params.id)
+    this.initData(this.props.location.state)
   }
 
   render() {

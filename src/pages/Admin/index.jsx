@@ -65,7 +65,7 @@ export default class Admin extends React.Component {
           </Menu.Item>
         ))
       } else {
-        let itemk = item.children.find(cItem => cItem.path === path)
+        let itemk = item.children.find(cItem => path.indexOf(cItem.path) === 0)
         if (itemk) {
           this.openKey = item.path 
         }
@@ -95,7 +95,11 @@ export default class Admin extends React.Component {
   
   render() {
     let name = localStorage.getItem('token')
-    const path = this.props.location.pathname
+    // 解决跳转子路由无法菜单不默认展示
+    let pathArr = (this.props.location.pathname).split('/')
+    let path = '/' + pathArr[1]
+    
+    
     if (name === null) {
       return <Redirect to='/login'></Redirect>
     } else {

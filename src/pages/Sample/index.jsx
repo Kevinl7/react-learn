@@ -14,7 +14,7 @@ class Sample extends React.Component {
       <Switch>
         {/* exact 路径完全匹配 */}
         <Route path="/sample" exact component={Home}></Route>
-        <Route path="/sample/detail/:id"   component={Detail}></Route>
+        <Route path="/sample/detail"   component={Detail}></Route>
         <Route path="/sample/add"   component={AddUpdate}></Route>
       </Switch>
     )

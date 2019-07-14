@@ -56,7 +56,11 @@ class Home extends React.Component {
         width: 100,
         render: (row) => {
           return (
-            <LinkBtton onClick={() => this.props.history.push(`/sample/detail/${row.id }`)}>详情</LinkBtton>
+            <span>
+              {/* 路由跳转传参，和vue不一样 */}
+              <LinkBtton onClick={() => this.props.history.push(`/sample/detail`, row.id)}>详情</LinkBtton>
+              <LinkBtton onClick={() => this.props.history.push(`/sample/add`, row)}>修改</LinkBtton>
+            </span>
           )
         }
       }

@@ -31,12 +31,12 @@ class addUpdate extends React.Component {
   getData = (id) => {
     let options =  [
       {
-        value: 'zhejiang',
+        value: '1',
         label: 'Zhejiang',
         isLeaf: false,
       },
       {
-        value: 'jiangsu',
+        value: '2',
         label: 'Jiangsu',
         isLeaf: false,
       }
@@ -49,18 +49,17 @@ class addUpdate extends React.Component {
 
   loadData = selectedOptions  => {
     const targetOption = selectedOptions[selectedOptions.length - 1]
-    console.log(targetOption)
     targetOption.loading = true
     setTimeout(() => {
       targetOption.loading = false;
       targetOption.children = [
         {
           label: `${targetOption.label} Dynamic 1`,
-          value: 'dynamic1',
+          value: '11',
         },
         {
           label: `${targetOption.label} Dynamic 2`,
-          value: 'dynamic2',
+          value: '21',
         },
       ];
       this.setState({
@@ -69,12 +68,17 @@ class addUpdate extends React.Component {
     }, 1000)
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.getData(0)
+    const prodcut = this.props.location.state
+    this.isAdd = !!prodcut
+    this.prodcut = prodcut || {}
+    this.prodcut.case = ['1', '11']
   }
 
   render () {
     const { getFieldDecorator } = this.props.form
+    const { isAdd, prodcut } = this
     const formItemLayout = {
       labelCol: { span: 3 },
       wrapperCol: { span: 8 },
@@ -83,7 +87,7 @@ class addUpdate extends React.Component {
       <span>
         <LinkButton onClick={() => this.props.history.push('/sample')}>
           <Icon type='arrow-left'></Icon>
-          <span>  添加商品</span>
+          <span>{ !isAdd ? '添加' : '修改' }</span>
         </LinkButton>
       </span>
     )
@@ -93,6 +97,7 @@ class addUpdate extends React.Component {
           <Item label="商品名称:">
             {
               getFieldDecorator('name', {
+                initialValue: prodcut.name,
                 rules: [{ required: true, message: '请输入' }],
               })(<Input />)
             }
@@ -100,13 +105,14 @@ class addUpdate extends React.Component {
           </Item>
           <Item label="商品描述:">
             {
-              getFieldDecorator('desc')(<TextArea autosize={{ minRows: 2, maxRows: 8 }} name='desc'></TextArea>)
+              getFieldDecorator('desc', { initialValue: prodcut.desc})(<TextArea autosize={{ minRows: 2, maxRows: 8 }} name='desc'></TextArea>)
             }
            
           </Item>
           <Item label="商品价格:">
             {
               getFieldDecorator('price', {
+                initialValue: prodcut.price,
                 rules: [
                   { required: true, message: '请输入'}, 
                   { validator: this.validatorPrice}
@@ -117,7 +123,7 @@ class addUpdate extends React.Component {
           </Item>
           <Item label="商品分类:">
             {
-              getFieldDecorator('case')(
+              getFieldDecorator('case', { initialValue: prodcut.case})(
               <Cascader
                 options={this.state.options}
                 loadData={this.loadData}
