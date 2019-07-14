@@ -74,8 +74,6 @@ class Home extends React.Component {
     this.setState({
       smapleData: data
     })
-    
-    
   }
 
   getData = async (pageNum) => {
