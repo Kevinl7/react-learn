@@ -1,26 +1,39 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import 'antd/dist/antd.css';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import { adminRoutes } from './routes';
 
-function App() {
+import LayoutMenu from './components/layout';
+import { hasToken } from './utils/auth'
+
+function App(props:any) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    hasToken() ? 
+    (
+      <LayoutMenu>
+      <Switch>
+        {
+          adminRoutes.map((route:any) => {
+            return (
+              <Route 
+                key={route.path}
+                path={route.path}
+                exact={route.exact}
+                render={
+                  routeProps => {
+                    return <route.component {...routeProps} />
+                  }
+                }
+              />
+            )
+          })
+        }
+        <Redirect to={adminRoutes[0].path} from="/admin" />
+        <Redirect to="/404" />
+      </Switch>
+    </LayoutMenu>
+    ) : (<Redirect to="/login" />)
+  )
 }
 
 export default App;
