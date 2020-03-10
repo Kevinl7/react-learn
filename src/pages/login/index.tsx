@@ -1,6 +1,7 @@
 import React from 'react'
 import { Form, Input, Button, Checkbox } from 'antd'
 import { setToken } from '../../utils/auth'
+import { login } from '../../api/auth'
 
 
 interface LoginForm {
@@ -11,8 +12,14 @@ interface LoginForm {
 const Login:React.FC = (props:any) => {
 
   const onFinish = (values:any) => {
-    setToken('1sjshdfs')
-    props.history.push('/')
+    login({})
+      .then(res => {
+        console.log(res);
+        
+        // setToken('1sjshdfs')
+        // props.history.push('/')
+      })
+    
   }
 
   return (
