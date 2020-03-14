@@ -13,11 +13,9 @@ const Login:React.FC = (props:any) => {
 
   const onFinish = (values:any) => {
     login({})
-      .then(res => {
-        console.log(res);
-        
-        // setToken('1sjshdfs')
-        // props.history.push('/')
+      .then((res:any) => {
+        setToken(res.token)
+        props.history.push('/')
       })
     
   }

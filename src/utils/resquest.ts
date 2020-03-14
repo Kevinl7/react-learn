@@ -3,13 +3,16 @@ import { getToken } from './auth'
 
 export const server = axios.create({
   baseURL: 'http://yapi.demo.qunar.com/mock/79442',
-  timeout: 6000
+  timeout: 6000,
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded"
+  }
 })
 
 
 // 全局请求拦截
 server.interceptors.request.use((config:any) => {
-  config.headers['token'] = getToken()
+  // config.headers['token'] = getToken()
   return config
 }, (error) => {
   return Promise.reject(error)
