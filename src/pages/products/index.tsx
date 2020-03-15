@@ -32,7 +32,7 @@ const Product:React.FC = (props:any) => {
       render: (txt:string, record:any, i:number) => {
         return (
           <div>
-            <Button type="primary">修改</Button>
+            <Button type="primary" onClick={ () => handelEdit(record.id) }>修改</Button>
             <Button type="danger" style={{marginLeft: '5px'}}>删除</Button>
           </div>
         )
@@ -43,6 +43,10 @@ const Product:React.FC = (props:any) => {
   useEffect(() => {
     initData()
   }, [tableForm])
+
+  const handelEdit = (id:number) => {
+    props.history.push(`/admin/product/form/${id}`)
+  }
 
 
   const initData = () => {
@@ -65,6 +69,8 @@ const Product:React.FC = (props:any) => {
   const handleRoute = () => {
     props.history.push('/admin/product/form')
   }
+
+
 
   return (
     <>
