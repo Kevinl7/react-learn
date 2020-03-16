@@ -6,14 +6,22 @@ import { addProduct, getProduct } from '../../../api/product'
 
 
 function ProductForm(props: any) {
+  
+  const [procutData, setProcutData] = useState({
+    name: 'xx',
+    price: ''
+  })
 
-  const [procutData, setProcutData] = useState({})
+  // const [form, setIsEdit] = useState(null)
+
+  const [form] = Form.useForm()
 
   useEffect(() => {
     if (props.match.params.id) {
       getProduct(props.match.params)
         .then(res => {
           setProcutData(res.data)
+          form.resetFields()
         })
     }
   }, [])
@@ -26,15 +34,22 @@ function ProductForm(props: any) {
         props.history.push('/admin/product')
       })
   }
+  const xxxxx = (s:any) => {
+    console.log(s);
+    
+  }
+
   return (
     <>
-      <Card title="商品" >
-        <Form 
+      <Card title="商品">
+        <Form
           onFinish={onFinish}
-          initialValues={{...procutData}}>
+          initialValues={{...procutData}}
+          form={form}
+          >
           <Row>
             <Col xs={24} sm={12} md={8} lg={8} xl={6}>
-              <Form.Item label="名称" name="name"  rules={[{ required: true, message: '请输入' }]}>
+              <Form.Item   label="名称" name="name"  rules={[{ required: true, message: '请输入' }]}>
                 <Input placeholder="请输入" />
               </Form.Item>
             </Col>
@@ -51,7 +66,6 @@ function ProductForm(props: any) {
           </Row>
         </Form>
       </Card>
-
     </>
   )
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Card, Table, Button } from 'antd'
+import { Card, Table, Button, message } from 'antd'
 
-import { getList } from '../../api/product'
+import { getList, deleProduct } from '../../api/product'
 
 const Product:React.FC = (props:any) => {
 
@@ -33,7 +33,7 @@ const Product:React.FC = (props:any) => {
         return (
           <div>
             <Button type="primary" onClick={ () => handelEdit(record.id) }>修改</Button>
-            <Button type="danger" style={{marginLeft: '5px'}}>删除</Button>
+            <Button type="danger" onClick={ () => handleDele(record.id, i)} style={{marginLeft: '5px'}}>删除</Button>
           </div>
         )
       }
@@ -46,6 +46,13 @@ const Product:React.FC = (props:any) => {
 
   const handelEdit = (id:number) => {
     props.history.push(`/admin/product/form/${id}`)
+  }
+
+  const handleDele = (id:number, i:number) => {
+    deleProduct({id})
+      .then((res:any) => {
+        setDataSource(dataSource.filter((item:any) => item.id !== id))
+      })
   }
 
 

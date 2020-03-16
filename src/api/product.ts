@@ -12,3 +12,7 @@ export const addProduct = (data:any) => {
 export const getProduct = (params:number) => {
   return get('/getProduct', params)
 }
+
+export const deleProduct = (data:any) => {
+  return post('/deleProduct', data)
+}
