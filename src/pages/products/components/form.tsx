@@ -8,14 +8,14 @@ import { addProduct, getProduct } from '../../../api/product'
 function ProductForm(props: any) {
   
   const [procutData, setProcutData] = useState({
-    name: 'xx',
-    price: ''
+    name: '',
+    price: '',
+    id: ''
   })
 
-  // const [form, setIsEdit] = useState(null)
 
   const [form] = Form.useForm()
-
+  
   useEffect(() => {
     if (props.match.params.id) {
       getProduct(props.match.params)
@@ -28,15 +28,12 @@ function ProductForm(props: any) {
 
 
   const onFinish = (values: any) => {
+
     addProduct(values)
       .then((res: any) => {
         message.success(res.msg)
         props.history.push('/admin/product')
       })
-  }
-  const xxxxx = (s:any) => {
-    console.log(s);
-    
   }
 
   return (

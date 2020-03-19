@@ -1,10 +1,18 @@
-import React from 'react'
+import React, {useContext} from 'react'
 
-function Dashboards() {
+import AppContext from '../../store'
+
+function Dashboards(props:any) {
+
+  const ctx = useContext(AppContext)
+  console.log(ctx);
+  
   return (
-    <div>
-      Dashboard
-    </div>
+    
+      <div>
+        Dashboard
+      </div>
+    
   )
 }
 
