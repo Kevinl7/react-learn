@@ -5,7 +5,6 @@ import AppContext from '../../store'
 function Dashboards(props:any) {
 
   const ctx = useContext(AppContext)
-  console.log(ctx);
   
   return (
     

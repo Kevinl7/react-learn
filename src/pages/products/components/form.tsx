@@ -29,7 +29,7 @@ function ProductForm(props: any) {
 
   const onFinish = (values: any) => {
 
-    addProduct(values)
+    addProduct({...values, id: procutData.id})
       .then((res: any) => {
         message.success(res.msg)
         props.history.push('/admin/product')
